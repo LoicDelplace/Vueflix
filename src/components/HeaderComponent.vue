@@ -89,6 +89,17 @@ const userStore = useUserStore()
       align-items: center;
       gap: 1rem;
       height: 100%;
+      input {
+        cursor: pointer;
+        background-color: #e67e22;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        &:hover {
+          background-color: #d35400;
+        }
+      }
     }
 
     .account-connected {
