@@ -13,7 +13,7 @@ export const useUserStore = defineStore('user', {
       const wasConnected = this.isConnected;
       this.isConnected = !wasConnected
 
-      if (!wasConnected.value) {
+      if (!wasConnected) {
         console.log(`Bienvenue, ${this.nickname}! Tu étais deconnecté.`)
       } else {
         console.log(`Au revoir, ${this.nickname}!`)
