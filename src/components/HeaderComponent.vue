@@ -1,20 +1,29 @@
 <template>
   <header>
     <div class="wrapper">
-      <div class="logoText">Vue<span>Flix</span></div>
+      <div class="logoText">
+        <p>Vue<span class="orangeLogoTitle">Flix</span></p>
+      </div>
       <nav>
         <RouterLink to="/">Accueil</RouterLink>
         <RouterLink to="/movies">Films</RouterLink>
         <RouterLink to="/about">A propos</RouterLink>
       </nav>
-      <div class="account-connected" v-if="!userStore.isConnected">
-        <input type="button" value="Connexion" @click="userStore.connection" />
-      </div>
-      <div class="account-not-connected" v-if="userStore.isConnected">
-        <div class="accountInfo">
-          <p>{{ userStore.nickname }}</p>
-          <img :src="userStore.avatar" alt="avatar" class="profileAvatar" />
-          <input type="button" value="Deconnexion" v-if="userStore.isConnected" @click="userStore.connection">
+      <div class="account">
+        <div class="account-connected" v-if="!userStore.isConnected">
+          <input type="button" value="Connexion" @click="userStore.connection" />
+        </div>
+        <div class="account-not-connected" v-if="userStore.isConnected">
+          <div class="accountInfo">
+            <p>{{ userStore.nickname }}</p>
+            <img :src="userStore.avatar" alt="avatar" class="profileAvatar" />
+            <input
+              type="button"
+              value="Deconnexion"
+              v-if="userStore.isConnected"
+              @click="userStore.connection"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +31,6 @@
 </template>
 
 <script setup>
-
 import { RouterLink } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
@@ -31,32 +39,109 @@ const userStore = useUserStore()
 
 <style scoped lang="scss">
 .wrapper {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  height: 4em;
-  padding: 0 1rem;
+  height: 6em;
+  padding: 0 3rem;
   background-color: #2c3e50;
   color: white;
-  a {
-    color: white;
-    text-decoration: none;
+  .logoText {
+    width:100%;
+    float: left;
+    font-size: 3rem;
     font-weight: bold;
-    font-size: 1rem;
-    margin: 0 1rem;
-    &:hover {
-      text-decoration: underline;
+    color: white;
+    .orangeLogoTitle {
+      color: #e67e22;
     }
   }
-  .accountInfo {
+  nav {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 1rem;
-    .profileAvatar {
-      border-radius: 50%;
-      object-fit: cover;
-      width: 3rem;
-      height: 3rem;
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 0 1rem;
+      &:hover {
+        color: #e67e22;
+        transition: 0.2s;
+        text-decoration: underline;
+      }
+    }
+  }
+  .account {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    .accountInfo {
+      width: 100%;
+      height: 100%;
+      float:right;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .account-connected {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      input {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: #e67e22;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        &:hover {
+          background-color: #d35400;
+        }
+      }
+    }
+    .account-not-connected {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      p {
+        font-weight: bold;
+        font-size: 1rem;
+        color: white;
+        margin: 0;
+        &:hover {
+          color: #e67e22;
+          transition: 0.2s;
+        }
+      }
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+        &:hover {
+          border: 2px solid #e67e22;
+          border-radius: 50%;
+          padding: 0.2rem;
+          width: 3.2rem;
+          height: 3.2rem;
+          object-fit: cover;
+          cursor: pointer;
+          transition: 0.2s;
+
+        }
+      }
+      
     }
   }
 }
