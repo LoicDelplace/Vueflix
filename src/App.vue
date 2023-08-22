@@ -11,8 +11,9 @@ import Footer from '@/components/FooterComponent.vue'
 </template>
 
 <style>
-@import url('https://fonts.bunny.net/css?family=poppins:100,100i,400,400i,600,600i,700,700i,900,900i');
+@import url(https://fonts.bunny.net/css?family=nunito:200,200i,500,500i,700,700i,900,900i);
+
 * {
-  font-family: "poppins", sans-serif;
+  font-family: "nunito", sans-serif;
 }
 </style>
