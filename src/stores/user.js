@@ -4,13 +4,13 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
   state: () => ({
     isConnected: false,
-    nickname: ref("Gevail"),
+    nickname: ref('Gevail'),
     age: ref(23),
     avatar: ref('https://avatars.dicebear.com/v2/avataaars/901fa48940fe4a2b670f4b01588ebb93.svg')
   }),
   actions: {
     connection() {
-      const wasConnected = this.isConnected;
+      const wasConnected = this.isConnected
       this.isConnected = !wasConnected
 
       if (!wasConnected) {
@@ -18,6 +18,6 @@ export const useUserStore = defineStore('user', {
       } else {
         console.log(`Au revoir, ${this.nickname}!`)
       }
-    },
+    }
   }
 })
