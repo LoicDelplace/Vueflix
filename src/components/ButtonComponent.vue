@@ -44,7 +44,6 @@ button {
     box-shadow: 0 0 0 0.2rem #c0392b;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
-    color: white;
   }
 }
 </style>
