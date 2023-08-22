@@ -96,6 +96,7 @@ const userStore = useUserStore()
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
+        border: none;
         font-weight: bold;
         &:hover {
           background-color: #d35400;
