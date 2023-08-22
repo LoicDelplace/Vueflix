@@ -48,7 +48,7 @@ const userStore = useUserStore()
   background-color: #2c3e50;
   color: white;
   .logoText {
-    width:100%;
+    width: 100%;
     float: left;
     font-size: 3rem;
     font-weight: bold;
@@ -85,7 +85,7 @@ const userStore = useUserStore()
     .accountInfo {
       width: 100%;
       height: 100%;
-      float:right;
+      float: right;
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -150,10 +150,8 @@ const userStore = useUserStore()
           object-fit: cover;
           cursor: pointer;
           transition: 0.2s;
-
         }
       }
-      
     }
   }
 }
