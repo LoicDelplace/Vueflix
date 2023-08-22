@@ -59,7 +59,7 @@ const toggleBio = () => {
     gap: 1rem;
     border-radius: 1.2rem;
     padding: 1rem;
-
+    margin-bottom: 2rem;
     .card-info {
       display: flex;
       align-items: center;
