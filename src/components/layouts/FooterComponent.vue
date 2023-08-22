@@ -1,25 +1,24 @@
+<script setup>
+import { onBeforeMount, ref } from 'vue'
+import { getMovies } from '@/services/api.js'
+
+const moviesNb = ref(0)
+
+onBeforeMount(() => {
+  getMovies().then((response) => {
+    moviesNb.value = response.length;
+  })
+})
+
+const yearDate = new Date().getFullYear()
+</script>
+
 <template>
   <footer>
-    Copyright © {{ yearDate }} - VueFlix - Votre répertoire de
+    Copyright © {{ yearDate }} - VueFlix - Catalogue de
     <span class="bold">&nbsp;{{ moviesNb }}&nbsp;</span> films.
   </footer>
 </template>
-
-<script setup>
-import { $fetch } from 'ohmyfetch';
-import { ref } from 'vue';
-
-$fetch('https://api.vueflix.boxydev.com/movies')
-  .then((response) => {
-    moviesNb.value = response.length;
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-
-const yearDate = new Date().getFullYear()
-let moviesNb = ref('0')
-</script>
 
 <style scoped lang="scss">
 footer {
