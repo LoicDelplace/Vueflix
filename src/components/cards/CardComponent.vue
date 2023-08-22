@@ -1,5 +1,5 @@
 <script setup>
-import Button from '@/components/ButtonComponent.vue'
+import Button from '@/components/buttons/ButtonComponent.vue'
 
 const props = defineProps(['user', 'open'])
 const emit = defineEmits(['opened'])

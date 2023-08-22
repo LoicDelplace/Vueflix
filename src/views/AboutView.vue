@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import AboutCard from '@/components/CardComponent.vue'
+import AboutCard from '@/components/cards/CardComponent.vue'
 
 const team = [
   {
