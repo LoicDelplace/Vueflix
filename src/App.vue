@@ -14,6 +14,11 @@ import Footer from '@/components/FooterComponent.vue'
 @import url(https://fonts.bunny.net/css?family=nunito:200,200i,500,500i,700,700i,900,900i);
 
 * {
-  font-family: "nunito", sans-serif;
+  font-family: 'nunito', sans-serif;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
 }
 </style>
