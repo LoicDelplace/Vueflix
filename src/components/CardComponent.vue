@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
 import Button from '@/components/ButtonComponent.vue'
 
 const props = defineProps(['user', 'open'])
