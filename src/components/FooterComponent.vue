@@ -6,8 +6,19 @@
 </template>
 
 <script setup>
+import { $fetch } from 'ohmyfetch';
+import { ref } from 'vue';
+
+$fetch('https://api.vueflix.boxydev.com/movies')
+  .then((response) => {
+    moviesNb.value = response.length;
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
 const yearDate = new Date().getFullYear()
-const moviesNb = '20'
+let moviesNb = ref('0')
 </script>
 
 <style scoped lang="scss">
