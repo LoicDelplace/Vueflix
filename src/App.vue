@@ -13,6 +13,14 @@ import Footer from '@/components/FooterComponent.vue'
 <style>
 @import url(https://fonts.bunny.net/css?family=nunito:200,200i,500,500i,700,700i,900,900i);
 
+.titleView {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 1em;
+}
+
 * {
   font-family: 'nunito', sans-serif;
 }

@@ -53,13 +53,7 @@ const selected = ref(null)
 </template>
 
 <style scoped lang="scss">
-.titleView {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin: 1em;
-}
+
 
 .card-grid {
   display: grid;

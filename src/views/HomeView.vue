@@ -1,5 +1,5 @@
 <template>
   <main>
-    <h1>Home View</h1>
+    <h1 class="titleView">Home View</h1>
   </main>
 </template>
