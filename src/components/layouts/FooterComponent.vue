@@ -1,25 +1,19 @@
+<script setup>
+import { ref } from 'vue'
+import { countMovies } from '@/services/api.js'
+
+const moviesNb = ref(0)
+const yearDate = new Date().getFullYear()
+
+countMovies().then((length) => (moviesNb.value = length))
+</script>
+
 <template>
   <footer>
-    Copyright © {{ yearDate }} - VueFlix - Votre répertoire de
+    Copyright © {{ yearDate }} - VueFlix - Catalogue de
     <span class="bold">&nbsp;{{ moviesNb }}&nbsp;</span> films.
   </footer>
 </template>
-
-<script setup>
-import { $fetch } from 'ohmyfetch';
-import { ref } from 'vue';
-
-$fetch('https://api.vueflix.boxydev.com/movies')
-  .then((response) => {
-    moviesNb.value = response.length;
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-
-const yearDate = new Date().getFullYear()
-let moviesNb = ref('0')
-</script>
 
 <style scoped lang="scss">
 footer {
@@ -35,7 +29,6 @@ footer {
   background-color: #2c3e50;
   color: white;
   text-align: center;
-  padding: 1rem;
   p {
     display: flex;
     justify-content: center;

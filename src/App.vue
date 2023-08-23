@@ -28,5 +28,6 @@ body {
   min-height: 100vh;
   margin: 0;
   position: relative;
+  background-color: #e5e7eb;
 }
 </style>
