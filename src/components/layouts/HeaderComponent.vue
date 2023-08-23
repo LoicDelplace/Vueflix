@@ -5,9 +5,9 @@
         <p>Vue<span class="orangeLogoTitle">Flix</span></p>
       </div>
       <nav>
-        <RouterLink to="/">Accueil</RouterLink>
-        <RouterLink to="/movies">Films</RouterLink>
-        <RouterLink to="/about">A propos</RouterLink>
+        <RouterLink :to="{name: 'home' }">Accueil</RouterLink>
+        <RouterLink :to="{name: 'movies' }">Films</RouterLink>
+        <RouterLink :to="{name: 'about' }">A propos</RouterLink>
       </nav>
       <div class="account">
         <div class="account-connected" v-if="!userStore.isConnected">
