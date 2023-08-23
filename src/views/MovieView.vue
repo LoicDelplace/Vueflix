@@ -3,8 +3,9 @@ import { getMovies } from '../services/api'
 import { ref } from 'vue'
 import MovieCard from '@/components/cards/MovieCardComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
-// import Button from '@/components/buttons/ButtonMoreComponent.vue';
+import Button from '@/components/buttons/ButtonComponent.vue';
 
+const page = ref(1);
 const movies = ref([])
 const loading = ref(true)
 getMovies().then((response) => {
@@ -13,6 +14,16 @@ getMovies().then((response) => {
     loading.value = false
   }, 1000)
 })
+const showMore = () => {
+  loading.value = true;
+
+  getMovies(++page.value).then((response) => {
+    setTimeout(() => {
+      movies.value = movies.value.concat(response)
+      loading.value = false
+    }, 1000)
+  })
+}
 </script>
 
 <template>
@@ -20,6 +31,9 @@ getMovies().then((response) => {
     <h1 class="titleView">Films</h1>
     <div class="movieCard-container">
       <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    </div>
+    <div class="showMore-btn-container">
+      <Button class="Button" @click="showMore">Voir plus</Button>
     </div>
   </div>
 
@@ -45,5 +59,14 @@ getMovies().then((response) => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.showMore-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+  
 }
 </style>
