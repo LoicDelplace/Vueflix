@@ -1,13 +1,11 @@
 <script setup>
-import MovieCard from '@/components/cards/MovieCardComponent.vue'
 import { getMovies } from '../services/api'
-import { onBeforeMount, ref } from 'vue'
+import { ref } from 'vue'
+import MovieCard from '@/components/cards/MovieCardComponent.vue'
 
 const movies = ref([])
-onBeforeMount(() => {
-  getMovies(5).then((response) => {
-    movies.value = response
-  })
+getMovies().then((response) => {
+  movies.value = response
 })
 </script>
 
