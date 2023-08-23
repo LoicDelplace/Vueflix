@@ -1,16 +1,11 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue'
-import { getMovies } from '@/services/api.js'
+import { ref } from 'vue'
+import { countMovies } from '@/services/api.js'
 
 const moviesNb = ref(0)
-
-onBeforeMount(() => {
-  getMovies().then((response) => {
-    moviesNb.value = response.length;
-  })
-})
-
 const yearDate = new Date().getFullYear()
+
+countMovies().then((length) => (moviesNb.value = length))
 </script>
 
 <template>
@@ -34,7 +29,6 @@ footer {
   background-color: #2c3e50;
   color: white;
   text-align: center;
-  padding: 1rem;
   p {
     display: flex;
     justify-content: center;
