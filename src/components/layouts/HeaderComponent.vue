@@ -5,9 +5,9 @@
         <p>Vue<span class="orangeLogoTitle">Flix</span></p>
       </div>
       <nav>
-        <RouterLink :to="{name: 'home' }">Accueil</RouterLink>
-        <RouterLink :to="{name: 'movies' }">Films</RouterLink>
-        <RouterLink :to="{name: 'about' }">A propos</RouterLink>
+        <RouterLink :to="{ name: 'home' }">Accueil</RouterLink>
+        <RouterLink :to="{ name: 'movies' }">Films</RouterLink>
+        <RouterLink :to="{ name: 'about' }">A propos</RouterLink>
       </nav>
       <div class="account">
         <div class="account-connected" v-if="!userStore.isConnected">
@@ -31,7 +31,6 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
@@ -40,7 +39,7 @@ const userStore = useUserStore()
 <style scoped lang="scss">
 header {
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: $secondary-color;
