@@ -1,11 +1,14 @@
 <script setup>
-import { getMovies } from '../services/api'
+import { getMovies, countMovies } from '../services/api'
 import { ref } from 'vue'
 import MovieCard from '@/components/cards/MovieCardComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
-import Button from '@/components/buttons/ButtonComponent.vue';
+import Button from '@/components/buttons/ButtonComponent.vue'
 
-const page = ref(1);
+countMovies().then((length) => (moviesNb.value = length))
+const moviesNb = ref(0)
+
+const page = ref(1)
 const movies = ref([])
 const loading = ref(true)
 getMovies().then((response) => {
@@ -15,7 +18,7 @@ getMovies().then((response) => {
   }, 1000)
 })
 const showMore = () => {
-  loading.value = true;
+  loading.value = true
 
   getMovies(++page.value).then((response) => {
     setTimeout(() => {
@@ -27,18 +30,20 @@ const showMore = () => {
 </script>
 
 <template>
-  <div class="container" v-if="!loading">
+  <div class="container">
     <h1 class="titleView">Films</h1>
-    <div class="movieCard-container">
-      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    <div v-if="!loading || movies.length > 0">
+      <div class="movieCard-container">
+        <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+      </div>
+      <div class="showMore-btn-container">
+        <Button @click="showMore" v-if="!loading && page <= moviesNb / 5">Voir plus</Button>
+        <Loader message="🚀 De nouveaux films ! 🚀" v-if="loading"/>
+      </div>
     </div>
-    <div class="showMore-btn-container">
-      <Button class="Button" @click="showMore">Voir plus</Button>
+    <div class="loaderContainer" v-else>
+      <Loader message="Nous récupérons les films !" />
     </div>
-  </div>
-
-  <div class="loaderContainer" v-else>
-    <Loader message="Nous récupérons les films !" />
   </div>
 </template>
 
@@ -67,6 +72,5 @@ const showMore = () => {
   justify-content: center;
   align-items: center;
   margin-bottom: 5rem;
-  
 }
 </style>
