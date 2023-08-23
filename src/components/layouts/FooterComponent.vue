@@ -24,8 +24,6 @@ footer {
   justify-content: center;
   align-items: center;
   bottom: 0;
-  left: 0;
-  right: 0;
   font-size: 1rem;
   background-color: $secondary-color;
   color: white;
