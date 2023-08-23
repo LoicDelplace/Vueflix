@@ -20,13 +20,14 @@ footer {
   width: 100%;
   height: 5rem;
   display: flex;
+  position:absolute;
   justify-content: center;
   align-items: center;
   bottom: 0;
   left: 0;
   right: 0;
   font-size: 1rem;
-  background-color: #2c3e50;
+  background-color: $secondary-color;
   color: white;
   text-align: center;
   p {

@@ -43,7 +43,7 @@ header {
   display:flex;
   justify-content: center;
   align-items: center;
-  background-color: #2c3e50;
+  background-color: $secondary-color;
   .wrapper {
     width: 100%;
     max-width: 80rem;
@@ -61,7 +61,7 @@ header {
       font-weight: bold;
       color: white;
       .orangeLogoTitle {
-        color: #e67e22;
+        color: $primary-color;
       }
     }
     nav {
@@ -77,7 +77,7 @@ header {
         font-size: 1rem;
         margin: 0 1rem;
         &:hover {
-          color: #e67e22;
+          color: $primary-color;
           transition: 0.2s;
           text-decoration: underline;
         }
@@ -99,7 +99,7 @@ header {
         height: 100%;
         input {
           cursor: pointer;
-          background-color: #e67e22;
+          background-color: $primary-color;
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 0.5rem;
@@ -119,7 +119,7 @@ header {
           border: none;
           outline: none;
           cursor: pointer;
-          background-color: #e67e22;
+          background-color: $primary-color;
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 0.5rem;
@@ -139,7 +139,7 @@ header {
           color: white;
           margin: 0;
           &:hover {
-            color: #e67e22;
+            color: $primary-color;
             transition: 0.2s;
           }
         }
@@ -150,7 +150,7 @@ header {
           height: 3rem;
           cursor: pointer;
           &:hover {
-            border: 2px solid #e67e22;
+            border: 2px solid $primary-color;
             border-radius: 50%;
             padding: 0.2rem;
             width: 3.2rem;

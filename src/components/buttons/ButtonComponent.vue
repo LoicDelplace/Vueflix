@@ -15,7 +15,7 @@ button {
   color: white;
   cursor: pointer;
   padding: 0.5rem 1rem;
-  background-color: #e67e22;
+  background-color: $primary-color;
   transition: 0.2s;
   &:hover {
     background-color: #d35400;

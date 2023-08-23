@@ -7,7 +7,7 @@ const team = [
     id: 1,
     nickname: 'Gevail',
     avatar: 'https://i.pravatar.cc/150?u=gevail',
-    bio: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tempore aliquam, et error quos nam veritatis cum eos nostrum laborum perferendis facilis eaque! Placeat alias dolore inventore itaque! Recusandae sapiente et suscipit labore, provident obcaecati ea. Doloribus alias qui sapiente dolorum nobis voluptas omnis quasi. Odio iusto repellat provident in.',
+    bio: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis corrupti ipsum odio, sed aut ipsam provident blanditiis, molestias veritatis impedit aperiam expedita tempora?',
     age: 23,
     job: 'Développeur',
     gender: 'M',

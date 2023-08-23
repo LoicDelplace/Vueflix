@@ -59,7 +59,9 @@ defineProps(['movie'])
       border: 2px solid #000;
       width: 3rem;
       height: 3rem;
-      text-align: center;
+      display:flex;
+      justify-content: center;
+      align-items: center;
       background-color: #000;
       position: absolute;
       left: 0.5em;
@@ -91,7 +93,7 @@ defineProps(['movie'])
       width: 100%;
       font-weight: bold;
       font-size: 1rem;
-      color: #2c3e50;
+      color: $secondary-color;
       margin: 0;
       letter-spacing: 0.1em;
       overflow: hidden;
@@ -99,7 +101,7 @@ defineProps(['movie'])
     }
     .moviesReleaseDate {
       font-size: 1em;
-      color: #2c3e50;
+      color: $secondary-color;
       margin: 0;
       font-weight: bold;
       letter-spacing: 0.1em;
@@ -109,7 +111,7 @@ defineProps(['movie'])
 
   a {
     text-decoration: none;
-    color: #2c3e50;
+    color: $secondary-color;
   }
 }
 </style>
