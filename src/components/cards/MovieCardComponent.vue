@@ -9,7 +9,7 @@ defineProps(['movie'])
 <template>
   <div class="movieCard">
     <div class="movieCard-top">
-      <RouterLink :to="`/films/`">
+      <RouterLink :to="{name: 'movie', params: { id: movie.id }}">
         <img :src="movie.poster_path" :alt="movie.title" />
       </RouterLink>
       <div
