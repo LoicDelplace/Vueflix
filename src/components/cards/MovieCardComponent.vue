@@ -1,22 +1,24 @@
 <script setup>
 import Note from '@/components/NoteComponent.vue'
+import slugify from 'slugify'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 
 dayjs.locale('fr')
 defineProps(['movie'])
+const slugTitle = (title) => slugify(title, { lower: true, locale: 'fr' })
 </script>
 
 <template>
   <div class="movieCard">
     <div class="movieCard-top">
-      <RouterLink :to="{name: 'movie', params: { id: movie.id }}" movie="movie">
+      <RouterLink :to="{ name: 'movie', params: { id: movie.id, slug: slugTitle(movie.title) } }" movie="movie">
         <img :src="movie.poster_path" :alt="movie.title" />
       </RouterLink>
-      <Note :note="movie.vote_average" class="note"/>
+      <Note :note="movie.vote_average" class="note" />
     </div>
     <div class="movieCard-bottom">
-      <RouterLink :to="`/films/`">
+      <RouterLink :to="{ name: 'movie', params: { id: movie.id, slug: slugTitle(movie.title) }}">
         <p class="movieTitle">{{ movie.title }}</p>
       </RouterLink>
       <p class="moviesReleaseDate">{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
@@ -44,9 +46,8 @@ defineProps(['movie'])
       height: 100%;
       object-fit: cover;
       position: relative;
-      border-radius:0.5em 0.5em 0 0;
+      border-radius: 0.5em 0.5em 0 0;
     }
-    
   }
   .movieCard-bottom {
     width: 95%;
