@@ -1,4 +1,5 @@
 <script setup>
+import Note from '@/components/NoteComponent.vue'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 
@@ -12,16 +13,7 @@ defineProps(['movie'])
       <RouterLink :to="{name: 'movie', params: { id: movie.id }}" movie="movie">
         <img :src="movie.poster_path" :alt="movie.title" />
       </RouterLink>
-      <div
-        class="movieNote"
-        :class="{
-          green: movie.vote_average >= 7,
-          yellow: movie.vote_average >= 5 && movie.vote_average < 7,
-          red: movie.vote_average < 5
-        }"
-      >
-        <p>{{ Math.floor(movie.vote_average * 10) + '%' }}</p>
-      </div>
+      <Note :note="movie.vote_average" class="note"/>
     </div>
     <div class="movieCard-bottom">
       <RouterLink :to="`/films/`">
@@ -54,31 +46,7 @@ defineProps(['movie'])
       position: relative;
       border-radius:0.5em 0.5em 0 0;
     }
-    .movieNote {
-      border-radius: 50%;
-      border: 2px solid #000;
-      width: 3rem;
-      height: 3rem;
-      display:flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #000;
-      position: absolute;
-      left: 0.5em;
-      bottom: 0.5em;
-      color: #fff;
-      &.green {
-        border-color: #22c55e;
-      }
-
-      &.yellow {
-        border-color: #eab308;
-      }
-
-      &.red {
-        border-color: #ef4444;
-      }
-    }
+    
   }
   .movieCard-bottom {
     width: 95%;
@@ -113,5 +81,11 @@ defineProps(['movie'])
     text-decoration: none;
     color: $secondary-color;
   }
+}
+
+.note {
+  position: absolute;
+  bottom: 0.5em;
+  left: 0.5em;
 }
 </style>
