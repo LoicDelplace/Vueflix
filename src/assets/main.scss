@@ -1,0 +1,33 @@
+@import 'variables';
+@import url(https://fonts.bunny.net/css?family=nunito:200,200i,500,500i,700,700i,900,900i);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
+  background-color: $color;
+  font-family: $font-family;
+  &:after{
+    content: '';
+    display: block;
+    height: 5rem;
+  }
+}
+
+.titleView {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: $secondary-color;
+  margin: 1em;
+}

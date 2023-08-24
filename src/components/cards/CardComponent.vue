@@ -51,7 +51,7 @@ const toggleBio = () => {
   .card {
     width: 20rem;
     height: 20rem;
-    background-color: #2c3e50;
+    background-color: $secondary-color;
     color: white;
     display: flex;
     flex-direction: column;
@@ -83,7 +83,7 @@ const toggleBio = () => {
       .job {
         font-weight: bold;
         font-size: 1.2rem;
-        color: #e67e22;
+        color: $primary-color;
       }
     }
 
@@ -96,7 +96,6 @@ const toggleBio = () => {
       justify-content: center;
       p {
         font-size: 1.2rem;
-        max-width: max-content;
         width: 100%;
         height: 100%;
         overflow: auto;
