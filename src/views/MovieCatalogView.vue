@@ -38,7 +38,7 @@ const showMore = () => {
       </div>
       <div class="showMore-btn-container">
         <Button @click="showMore" v-if="!loading && page <= moviesNb / 5">Voir plus</Button>
-        <Loader message="🚀 De nouveaux films ! 🚀" v-if="loading"/>
+        <Loader message="🚀 De nouveaux films ! 🚀" v-if="loading" />
       </div>
     </div>
     <div class="loaderContainer" v-else>
