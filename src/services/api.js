@@ -9,3 +9,7 @@ export const getMovies = async (page = 1, nbMovies = 5) => {
 export const countMovies = async () => {
   return api('/movies/').then((response) => response.length)
 }
+
+export const getMovie = (id) => {
+  return api(`/movies/${id}?_expand=genre&_expand=actors`)
+}
