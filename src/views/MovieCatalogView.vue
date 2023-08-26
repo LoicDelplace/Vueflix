@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import MovieCard from '@/components/cards/MovieCardComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import Button from '@/components/buttons/ButtonComponent.vue'
+import { useCartStore } from '@/stores/cart.js'
 
 countMovies().then((length) => (moviesNb.value = length))
 const moviesNb = ref(0)
@@ -27,11 +28,20 @@ const showMore = () => {
     }, 1000)
   })
 }
+
+const cartStore = useCartStore()
 </script>
 
 <template>
   <div class="container">
     <h1 class="titleView">Films</h1>
+
+    <ul class="cart" v-if="!loading || movies.length > 0">
+      <li v-for="item in cartStore.cart" :key="item.id" class="cart-item">
+        <img :src="item.movie.poster_path" :alt="item.movie.title" width="80" />
+      </li>
+    </ul>
+
     <div v-if="!loading || movies.length > 0">
       <div class="movieCard-container">
         <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
@@ -71,6 +81,21 @@ const showMore = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5rem;
+}
+
+.cart {
+  list-style: none;
+  font-size: 2em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
   margin-bottom: 5rem;
 }
 </style>
