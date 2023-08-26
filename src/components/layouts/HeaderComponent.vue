@@ -1,3 +1,14 @@
+<script setup>
+import { useUserStore } from '@/stores/user'
+import { useCartStore } from '@/stores/cart'
+import { RouterLink } from 'vue-router'
+import ButtonCart from '@/components/buttons/ButtonCartComponent.vue'
+
+
+const userStore = useUserStore()
+const cartStore = useCartStore()
+</script>
+
 <template>
   <header>
     <div class="wrapper">
@@ -24,17 +35,16 @@
               @click="userStore.connection"
             />
           </div>
+          <span v-if="cartStore.total > 0">
+            <RouterLink :to="{ name: 'cart'}" :cart="{cartStore}">
+              <ButtonCart class="ButtonCart">Panier: {{ cartStore.total }}</ButtonCart>
+            </RouterLink>
+          </span>
         </div>
       </div>
     </div>
   </header>
 </template>
-
-<script setup>
-import { useUserStore } from '@/stores/user'
-
-const userStore = useUserStore()
-</script>
 
 <style scoped lang="scss">
 header {
@@ -161,6 +171,15 @@ header {
         }
       }
     }
+  }
+}
+
+.ButtonCart {
+  font-size: 0.5em;
+  display: flex;
+  border-radius: 0.5em;
+  &:focus {
+    border-radius: 0.5em;
   }
 }
 </style>
