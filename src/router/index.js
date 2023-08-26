@@ -19,9 +19,14 @@ const router = createRouter({
       component: () => import('@/views/MovieCatalogView.vue'),
     },
     {
-      path: '/film/:id-:slug',
+      path: '/film/:id-:slug?',
       name: 'movie',
       component: () => import('@/views/MoviePageView.vue')
+    },
+    {
+      path: '/panier/',
+      name: 'cart',
+      component: () => import('@/views/CartView.vue')
     }
   ]
 })
