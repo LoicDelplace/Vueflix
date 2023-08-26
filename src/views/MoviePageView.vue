@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { getMovie } from '@/services/api'
 import { useRoute } from 'vue-router'
 import Note from '@/components/NoteComponent.vue'
+import Modal from '@/components/ModalComponent.vue'
 import TrailerButton from '@/components/buttons/ButtonTrailerComponent.vue'
 import dayjs from 'dayjs'
 
@@ -10,6 +11,7 @@ const route = useRoute()
 const movie = ref({})
 const genre = ref({})
 const color = ref([0, 0, 0])
+const showModal = ref(false)
 
 getMovie(route.params.id).then((response) => {
   movie.value = response
@@ -43,7 +45,7 @@ const duration = computed(() => {
             </div>
             <div class="movie-actions">
               <Note :note="movie.vote_average" />
-              <TrailerButton @click="showModal">
+              <TrailerButton @click="showModal = true">
                 <template #text>Voir la bande annonce</template>
               </TrailerButton>
             </div>
@@ -61,6 +63,10 @@ const duration = computed(() => {
       </div>
     </div>
   </div>
+
+  <Teleport to="body">
+    <Modal :show="showModal" @close="showModal = false"></Modal>
+  </Teleport>
 </template>
 
 <style scoped lang="scss">
