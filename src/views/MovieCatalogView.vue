@@ -37,10 +37,11 @@ const cartStore = useCartStore()
     <h1 class="titleView">Films</h1>
 
     <ul class="cart" v-if="!loading || movies.length > 0">
-      <li v-for="item in cartStore.cart" :key="item.id" class="cart-item">
+      <li v-for="item in cartStore.cart" :key="item.movie.id" class="cart-item">
         <img :src="item.movie.poster_path" :alt="item.movie.title" width="80" />
       </li>
     </ul>
+
 
     <div v-if="!loading || movies.length > 0">
       <div class="movieCard-container">
