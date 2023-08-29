@@ -1,7 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { getMovie } from '@/services/api'
+import { getMovie, getComments, postComment } from '@/services/api'
 import { useRoute } from 'vue-router'
+import Button from '@/components/buttons/ButtonComponent.vue'
 import Note from '@/components/NoteComponent.vue'
 import Modal from '@/components/ModalComponent.vue'
 import TrailerButton from '@/components/buttons/ButtonTrailerComponent.vue'
@@ -12,6 +13,12 @@ const movie = ref({})
 const genre = ref({})
 const color = ref([0, 0, 0])
 const showModal = ref(false)
+const comments = ref({})
+const newComment = ref({ message: ''})
+
+getComments(route.params.id).then((response) => {
+  comments.value = response
+})
 
 getMovie(route.params.id).then((response) => {
   movie.value = response
@@ -28,7 +35,19 @@ const duration = computed(() => {
   return `${hours}h${minutes < 10 ? 0 : ''}${minutes}`
 })
 
+// Calcul l'age par rapport à la date envoyé en paramètre
 const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFullYear() - 1970
+
+//Fonction qui permet d'ajouter un commentaire
+const send = (event) => {
+  event.preventDefault()
+
+  //  Ajoute le commentaire dans l'API puis récupère la liste des coms à jours.
+  postComment(movie.value.id, newComment.value.message)
+    .then(() => getComments(movie.value.id).then((response) => (comments.value = response)))
+    .then(() => getComments(movie.value.id))
+    .then((response) => (comments.value = response))
+}
 </script>
 
 <template>
@@ -65,16 +84,51 @@ const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUT
       </div>
     </div>
   </div>
-    <div class="container">
-      <h1 class="content-title">Casting</h1>
-      <div class="content-casting">
-        <div v-for="(actor, index) in movie.actors" :key="index" class="card-actor">
-          <img :src="actor.profile_path" :alt="actor.name"/>
-          <h2>{{ actor.name }} ({{ actorAge(actor.birthday) }} ans)</h2>
-          <h3>{{ actor.character }}</h3>
-        </div>
+  <div class="container">
+    <h1 class="content-title">Casting</h1>
+    <div class="content-casting">
+      <div v-for="(actor, index) in movie.actors" :key="index" class="card-actor">
+        <img :src="actor.profile_path" :alt="actor.name" />
+        <h2>{{ actor.name }} ({{ actorAge(actor.birthday) }} ans)</h2>
+        <h3>{{ actor.character }}</h3>
       </div>
     </div>
+  </div>
+
+  <div class="container">
+    <h1 class="content-title">Commentaires ({{ comments.length }})</h1>
+    <div class="content-comments">
+      <div class="comment-add">
+        <label for="comment-zone">Ajouter un commentaire</label>
+        <form method="POST" class="comment-form" >
+          <textarea class="addComment" rows="5" col="50" v-model="newComment.message"></textarea>
+          <Button type="submit" @click="send">Envoyer</Button>
+        </form>
+      </div>
+
+      <div class="comments">
+        <ul>
+          <li v-for="comment in comments" :key="comment.id">
+            <div class="comment-info-container">
+              <img
+                :src="`https://i.pravatar.cc/50?u=${comment.userId}`"
+                :alt="comment.user.name"
+                class="comment-avatar"
+              />
+              <p class="comment-infos">
+                Écrit par {{ comment.user.name }} le
+                {{ dayjs(comment.createdAt).format('DD/MM/YYYY') }} à
+                {{ dayjs(comment.createdAt).format('HH:mm') }}
+              </p>
+            </div>
+            <div class="comment">
+              <p>{{ comment.message }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <Teleport to="body">
     <Modal :show="showModal" @close="showModal = false" :movie="movie"></Modal>
@@ -147,7 +201,7 @@ const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUT
 
 .content-casting {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   height: 100%;
   width: 100%;
@@ -155,7 +209,7 @@ const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUT
     font-size: 1rem;
   }
   .card-actor {
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap: 1rem;
     height: 350px;
@@ -170,8 +224,8 @@ const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUT
       object-fit: cover;
     }
 
-    h2{
-      font-size: 1.2em
+    h2 {
+      font-size: 1.2em;
     }
 
     h2,
@@ -184,6 +238,71 @@ const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUT
     h3 {
       font-size: 1rem;
       color: #666;
+    }
+  }
+}
+
+.comment-note {
+  display: flex;
+  align-items: center;
+}
+
+.content-comments {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .comment-add {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    label {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .addComment {
+        width: 100%;
+        height: 150px;
+        resize: vertical;
+      }
+    }
+  }
+
+  .comments {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      li {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid #eee;
+        padding: 1rem;
+
+        .comment-info-container {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          .comment-avatar {
+            border-radius: 50px;
+          }
+          .comment-infos {
+            font-size: 1rem;
+          }
+        }
+      }
     }
   }
 }
