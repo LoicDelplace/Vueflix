@@ -27,6 +27,8 @@ const duration = computed(() => {
   const minutes = movie.value.runtime % 60
   return `${hours}h${minutes < 10 ? 0 : ''}${minutes}`
 })
+
+const actorAge = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFullYear() - 1970
 </script>
 
 <template>
@@ -63,9 +65,19 @@ const duration = computed(() => {
       </div>
     </div>
   </div>
+    <div class="container">
+      <h1 class="content-title">Casting</h1>
+      <div class="content-casting">
+        <div v-for="(actor, index) in movie.actors" :key="index" class="card-actor">
+          <img :src="actor.profile_path" :alt="actor.name"/>
+          <h2>{{ actor.name }} ({{ actorAge(actor.birthday) }} ans)</h2>
+          <h3>{{ actor.character }}</h3>
+        </div>
+      </div>
+    </div>
 
   <Teleport to="body">
-    <Modal :show="showModal" @close="showModal = false"></Modal>
+    <Modal :show="showModal" @close="showModal = false" :movie="movie"></Modal>
   </Teleport>
 </template>
 
@@ -133,10 +145,60 @@ const duration = computed(() => {
   }
 }
 
+.content-casting {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+  h2 {
+    font-size: 1rem;
+  }
+  .card-actor {
+    display:flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 350px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: #fff;
+
+    img {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px 10px 0 0;
+      object-fit: cover;
+    }
+
+    h2{
+      font-size: 1.2em
+    }
+
+    h2,
+    h3 {
+      margin: 0;
+      padding-right: 0.5em;
+      padding-left: 0.5em;
+    }
+
+    h3 {
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+}
+
 .container {
   max-width: 1280px;
   height: 100%;
   margin: 0 auto;
   padding: 1rem 0.75rem;
+}
+
+@media (max-width: 400px) {
+  .header-bg-content {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

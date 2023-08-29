@@ -1,45 +1,52 @@
 <script setup>
 import Button from '@/components/buttons/ButtonComponent.vue'
 
-defineProps(['show'])
+defineProps({
+  show: Boolean,
+  movie: Object
+})
 
 const emit = defineEmits(['close'])
+console.log()
 </script>
-
 
 <template>
   <transition name="modal">
-        <div v-if="show" class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+    <div v-if="show" class="modal-mask" >
+      <div class="modal-wrapper" @click.self="emit('close')">
+        <div class="modal-container" >
+          <div class="modal-header">
+            <slot name="header">
+              <h2>{{ movie.title }}</h2>
+            </slot>
+          </div>
 
-              <div class="modal-header">
-                <slot name="header">
-                  default header
-                </slot>
-              </div>
+          <div class="modal-body">
+            <slot name="body">
+              <iframe class="iframe"
+                width="100%"
+                height="500"
+                :src="`https://www.youtube.com/embed/${movie.youtube}?si=acvU5JF_0LYORB2c`"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </slot>
+          </div>
 
-              <div class="modal-body">
-                <slot name="body">
-                  default body
-                </slot>
-              </div>
-
-              <div class="modal-footer">
-                <slot name="footer">
-                  default footer
-                  <Button @click="emit('close')">
-                    OK
-                  </Button>
-                </slot>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <slot name="footer">
+              <Button @click="emit('close')"> OK </Button>
+            </slot>
           </div>
         </div>
-      </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
-<style scoped> 
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -58,7 +65,8 @@ const emit = defineEmits(['close'])
 }
 
 .modal-container {
-  width: 300px;
+  width: 100%;
+  max-width: 80rem;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -77,12 +85,26 @@ const emit = defineEmits(['close'])
   margin: 20px 0;
 }
 
+.modal-footer {
+  display:flex;
+  justify-content: end;
+}
+
 .modal-default-button {
   float: right;
 }
 
 .modal-enter {
   opacity: 0;
+}
+
+.modal-enter-from {
+  opacity: 0;
+}
+
+.modal-enter-to {
+  transition: 0.8s;
+  opacity: 1;
 }
 
 .modal-leave-active {
@@ -94,5 +116,4 @@ const emit = defineEmits(['close'])
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
 </style>
